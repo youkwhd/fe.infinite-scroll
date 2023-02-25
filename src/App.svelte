@@ -21,8 +21,8 @@
     onMount(async () => { await fetchMovies() })
 
     /**
-     * a wrapper for createInfiniteObserver since it has to wait
-     * for lastMovieElement to get it's value assigned
+     * a wrapper for createInfiniteObserver in order to validate parameter element
+     * since it has to wait for lastMovieElement to get it's value assigned
      */
     const __createInfiniteObserver = (element: HTMLElement, callback: Function) => {
         if (element !== null)
