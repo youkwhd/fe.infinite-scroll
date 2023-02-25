@@ -6,10 +6,8 @@
 
     let movies: Array<any> = []
     let __page_counter: number = 1
-
-    let isLoading = false
-    
     let lastMovieElement: HTMLElement = null
+    let isLoading = false
 
     const fetchMovies = async () => { 
         isLoading = true
@@ -18,18 +16,17 @@
         movies = movies.concat(data.results)
     }
 
-    onMount(async () => { await fetchMovies() })
-
     /**
-     * a wrapper for createInfiniteObserver in order to validate parameter element
-     * since it has to wait for lastMovieElement to get it's value assigned
+     * listen for lastMovieElement to get it's value assigned
      */
-    const __createInfiniteObserver = (element: HTMLElement, callback: Function) => {
-        if (element !== null)
-            createInfiniteObserver(element, callback)
-    }
+    $: lastMovieElement, (() => {
+        if (lastMovieElement === null)
+            return
 
-    $: lastMovieElement, __createInfiniteObserver(lastMovieElement, fetchMovies)
+        createInfiniteObserver(lastMovieElement, fetchMovies)
+    })()
+
+    onMount(async () => { await fetchMovies() })
 </script>
 
 <main>
