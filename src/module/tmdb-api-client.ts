@@ -8,7 +8,7 @@ export type TMDBDiscoverMovieParams = {
 const tmdbBuildURLParams = (baseUrl: string, params: { [key: string]: any }): string => {
     baseUrl = baseUrl.concat("?")
 
-    const __params = Object.entries(params)
+    const __params: any[][] = Object.entries(params)
     __params.forEach(([key, val], i) => {
         if (val === undefined || val === null)
             return
