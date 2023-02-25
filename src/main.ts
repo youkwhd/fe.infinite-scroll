@@ -1,3 +1,3 @@
-import App from "./Main.svelte"
+import App from "./App.svelte"
 
 export default new App({ target: document.getElementById("__root") })
